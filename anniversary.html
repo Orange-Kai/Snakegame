@@ -1,0 +1,999 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Happy 10th Monthsary</title>
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;1,500;1,600&family=Jost:wght@300;400;500&family=Caveat:wght@500;600;700&display=swap');
+
+  :root{
+    --plum-deep: #241220;
+    --plum: #3a1f34;
+    --wine: #6e2b3f;
+    --rose-dust: #c17d8a;
+    --blush: #e8b9bc;
+    --gold: #d1a45c;
+    --gold-bright: #e8c988;
+    --cream: #f6ecdf;
+    --cream-dim: #d9c9b8;
+  }
+
+  *{ box-sizing: border-box; margin:0; padding:0; }
+
+  html{ scroll-behavior: smooth; }
+
+  body{
+    background: var(--plum-deep);
+    color: var(--cream);
+    font-family: 'Jost', sans-serif;
+    font-weight: 300;
+    overflow-x: hidden;
+    position: relative;
+  }
+
+  /* ---------- ambient background ---------- */
+  #stars{
+    position: fixed;
+    inset: 0;
+    z-index: 0;
+    pointer-events: none;
+  }
+  .star{
+    position: absolute;
+    background: var(--cream);
+    border-radius: 50%;
+    opacity: 0.5;
+    animation: twinkle 4s ease-in-out infinite;
+  }
+  @keyframes twinkle{
+    0%, 100%{ opacity: 0.15; }
+    50%{ opacity: 0.7; }
+  }
+
+  section{
+    position: relative;
+    z-index: 1;
+  }
+
+  h1, h2, h3{
+    font-family: 'Cormorant Garamond', serif;
+    font-weight: 500;
+    letter-spacing: 0.02em;
+  }
+
+  .script{
+    font-family: 'Caveat', cursive;
+  }
+
+  .eyebrow{
+    text-transform: uppercase;
+    letter-spacing: 0.35em;
+    font-size: 0.7rem;
+    color: var(--gold);
+    font-weight: 400;
+  }
+
+  /* ============ HERO / WAX SEAL LETTER ============ */
+  #hero{
+    min-height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+    text-align: center;
+    padding: 2rem;
+    background:
+      radial-gradient(ellipse at 50% 20%, rgba(209,164,92,0.10), transparent 55%),
+      radial-gradient(ellipse at 20% 80%, rgba(110,43,63,0.35), transparent 60%),
+      var(--plum-deep);
+  }
+
+  .envelope-wrap{
+    cursor: pointer;
+    user-select: none;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 1.5rem;
+  }
+
+  .envelope{
+    width: 180px;
+    height: 120px;
+    position: relative;
+    filter: drop-shadow(0 15px 30px rgba(0,0,0,0.45));
+  }
+
+  .envelope .body{
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(160deg, var(--rose-dust), var(--wine));
+    border-radius: 4px;
+  }
+
+  .envelope .flap{
+    position: absolute;
+    top: 0; left: 0; right: 0;
+    height: 62px;
+    background: linear-gradient(160deg, #d9a4ac, var(--rose-dust));
+    clip-path: polygon(0 0, 100% 0, 50% 78%);
+    transform-origin: top center;
+    transition: transform 1.1s cubic-bezier(.6,.05,.28,1);
+    border-radius: 4px 4px 0 0;
+  }
+
+  .seal{
+    position: absolute;
+    top: 46px; left: 50%;
+    transform: translateX(-50%);
+    width: 44px; height: 44px;
+    border-radius: 50%;
+    background: radial-gradient(circle at 35% 30%, #e2b869, var(--gold) 60%, #9c7331);
+    box-shadow: 0 4px 10px rgba(0,0,0,0.4);
+    display: flex; align-items: center; justify-content: center;
+    font-family: 'Cormorant Garamond', serif;
+    font-style: italic;
+    font-size: 1.1rem;
+    color: var(--plum-deep);
+    transition: opacity .4s ease, transform .4s ease;
+    z-index: 2;
+  }
+
+  .envelope-wrap.open .flap{
+    transform: rotateX(180deg);
+  }
+  .envelope-wrap.open .seal{
+    opacity: 0;
+    transform: translateX(-50%) scale(0.5);
+  }
+
+  .prompt-text{
+    font-family: 'Caveat', cursive;
+    font-size: 1.4rem;
+    color: var(--cream-dim);
+    letter-spacing: 0.02em;
+  }
+
+  .envelope-wrap.open .prompt-text{ opacity: 0; height: 0; }
+
+  #hero-reveal{
+    max-height: 0;
+    overflow: hidden;
+    opacity: 0;
+    transition: max-height 1.2s ease, opacity 1.4s ease .3s;
+  }
+  #hero-reveal.show{
+    max-height: 600px;
+    opacity: 1;
+    margin-top: 2.2rem;
+  }
+
+  .names{
+    font-size: clamp(2.4rem, 7vw, 4.2rem);
+    font-style: italic;
+    color: var(--cream);
+  }
+  .names .amp{ color: var(--gold); padding: 0 0.15em; }
+
+  .hero-sub{
+    margin-top: 0.8rem;
+    color: var(--cream-dim);
+    font-size: 1rem;
+    letter-spacing: 0.06em;
+  }
+
+  .counter{
+    margin-top: 2rem;
+    display: inline-flex;
+    gap: 2.2rem;
+    flex-wrap: wrap;
+    justify-content: center;
+  }
+  .counter div{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+  .counter .num{
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 2.4rem;
+    color: var(--gold);
+    line-height: 1;
+  }
+  .counter .lbl{
+    font-size: 0.65rem;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: var(--cream-dim);
+    margin-top: 0.4rem;
+  }
+
+  .scroll-cue{
+    position: absolute;
+    bottom: 2.2rem;
+    left: 50%;
+    transform: translateX(-50%);
+    font-size: 0.68rem;
+    letter-spacing: 0.3em;
+    text-transform: uppercase;
+    color: var(--cream-dim);
+    opacity: 0.7;
+    animation: bob 2.4s ease-in-out infinite;
+  }
+  @keyframes bob{
+    0%,100%{ transform: translate(-50%, 0); }
+    50%{ transform: translate(-50%, 8px); }
+  }
+
+  /* ============ STORY / TIMELINE ============ */
+  #story{
+    padding: 7rem 1.5rem 6rem;
+    max-width: 900px;
+    margin: 0 auto;
+  }
+
+  .section-head{
+    text-align: center;
+    margin-bottom: 4.5rem;
+  }
+  .section-head h2{
+    font-size: clamp(2rem, 5vw, 2.8rem);
+    font-style: italic;
+    margin-top: 0.6rem;
+  }
+
+  .timeline{
+    position: relative;
+    padding-left: 2px;
+  }
+  .timeline::before{
+    content: '';
+    position: absolute;
+    left: 26px;
+    top: 0; bottom: 0;
+    width: 1px;
+    background: linear-gradient(var(--gold), transparent 95%);
+    opacity: 0.5;
+  }
+
+  .t-item{
+    position: relative;
+    padding-left: 70px;
+    margin-bottom: 4rem;
+    opacity: 0;
+    transform: translateY(30px);
+    transition: opacity .8s ease, transform .8s ease;
+  }
+  .t-item.visible{ opacity: 1; transform: translateY(0); }
+
+  .t-dot{
+    position: absolute;
+    left: 18px;
+    top: 6px;
+    width: 17px; height: 17px;
+    border-radius: 50%;
+    background: var(--plum-deep);
+    border: 2px solid var(--gold);
+  }
+
+  .t-date{
+    font-size: 0.7rem;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: var(--gold);
+    margin-bottom: 0.4rem;
+    display: block;
+  }
+
+  .t-item h3{
+    font-size: 1.5rem;
+    font-style: italic;
+    margin-bottom: 0.6rem;
+  }
+
+  .t-item p{
+    color: var(--cream-dim);
+    font-size: 0.95rem;
+    line-height: 1.65;
+    max-width: 55ch;
+  }
+
+  .polaroid{
+    margin-top: 1.2rem;
+    width: 150px;
+    background: var(--cream);
+    padding: 10px 10px 34px;
+    border-radius: 2px;
+    box-shadow: 0 10px 20px rgba(0,0,0,0.35);
+    transform: rotate(var(--tilt, -4deg));
+    transition: transform .3s ease;
+  }
+  .polaroid:hover{ transform: rotate(0deg) scale(1.03); }
+  .polaroid .frame{
+    width: 100%;
+    aspect-ratio: 1 / 1;
+    background: linear-gradient(135deg, var(--wine), var(--plum));
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: var(--cream-dim);
+    font-size: 0.65rem;
+    letter-spacing: 0.05em;
+    text-align: center;
+    padding: 0.5rem;
+  }
+  .polaroid .cap{
+    font-family: 'Caveat', cursive;
+    color: var(--plum-deep);
+    font-size: 1.05rem;
+    text-align: center;
+    margin-top: 8px;
+  }
+
+  /* ============ LOVE NOTES ============ */
+  #notes{
+    padding: 6rem 1.5rem 7rem;
+    background: linear-gradient(180deg, transparent, rgba(110,43,63,0.18), transparent);
+  }
+  .notes-grid{
+    max-width: 980px;
+    margin: 0 auto;
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(210px, 1fr));
+    gap: 1.6rem;
+  }
+  .note-card{
+    background: rgba(246,236,223,0.04);
+    border: 1px solid rgba(209,164,92,0.25);
+    border-radius: 8px;
+    padding: 1.8rem 1.4rem;
+    text-align: center;
+    cursor: pointer;
+    min-height: 150px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 0.8rem;
+    transition: border-color .3s ease, background .3s ease;
+    position: relative;
+    overflow: hidden;
+  }
+  .note-card:hover{
+    border-color: var(--gold);
+    background: rgba(209,164,92,0.06);
+  }
+  .note-card .icon{
+    font-size: 1.5rem;
+    color: var(--gold);
+    transition: transform .4s ease;
+  }
+  .note-card.opened .icon{ transform: scale(0); }
+  .note-card .front-label{
+    font-size: 0.7rem;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: var(--cream-dim);
+    transition: opacity .3s ease;
+  }
+  .note-card.opened .front-label{ opacity: 0; position:absolute; }
+  .note-card .msg{
+    font-family: 'Caveat', cursive;
+    font-size: 1.25rem;
+    color: var(--cream);
+    line-height: 1.4;
+    max-height: 0;
+    opacity: 0;
+    transition: max-height .5s ease, opacity .5s ease .1s;
+  }
+  .note-card.opened .msg{
+    max-height: 200px;
+    opacity: 1;
+  }
+
+  /* ============ CLOSING / CONSTELLATION ============ */
+  #closing{
+    min-height: 90vh;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    padding: 6rem 1.5rem;
+    position: relative;
+  }
+  #closing h2{
+    font-size: clamp(2.2rem, 6vw, 3.4rem);
+    font-style: italic;
+    max-width: 16ch;
+    line-height: 1.25;
+  }
+  #closing .sign{
+    margin-top: 2.5rem;
+    font-family: 'Caveat', cursive;
+    font-size: 2rem;
+    color: var(--gold);
+  }
+  #closing .date{
+    margin-top: 0.6rem;
+    font-size: 0.75rem;
+    letter-spacing: 0.25em;
+    text-transform: uppercase;
+    color: var(--cream-dim);
+  }
+
+  .heart-burst{
+    position: fixed;
+    pointer-events: none;
+    z-index: 5;
+    font-size: 1rem;
+    color: var(--blush);
+    animation: floatUp 2.2s ease-out forwards;
+  }
+  @keyframes floatUp{
+    0%{ transform: translateY(0) scale(0.6); opacity: 0.9; }
+    100%{ transform: translateY(-140px) scale(1.1); opacity: 0; }
+  }
+
+  footer{
+    text-align: center;
+    padding: 2.5rem 1.5rem 3rem;
+    font-size: 0.7rem;
+    letter-spacing: 0.15em;
+    color: var(--cream-dim);
+    opacity: 0.6;
+  }
+
+  /* ============ EXPLORE: LETTER / PICTURES / MUSIC ============ */
+  #explore{
+    padding: 2rem 1.5rem 6rem;
+    max-width: 900px;
+    margin: 0 auto;
+  }
+
+  .explore-buttons{
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 1rem;
+    margin-bottom: 0.5rem;
+  }
+
+  .explore-btn{
+    font-family: 'Jost', sans-serif;
+    font-size: 0.78rem;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    color: var(--cream);
+    background: rgba(246,236,223,0.04);
+    border: 1px solid rgba(209,164,92,0.35);
+    border-radius: 999px;
+    padding: 0.85rem 1.7rem;
+    cursor: pointer;
+    display: inline-flex;
+    align-items: center;
+    gap: 0.6rem;
+    transition: border-color .3s ease, background .3s ease, color .3s ease;
+  }
+  .explore-btn .mark{ color: var(--gold); font-size: 0.9rem; }
+  .explore-btn:hover{
+    border-color: var(--gold);
+    background: rgba(209,164,92,0.08);
+  }
+  .explore-btn.active{
+    background: var(--gold);
+    border-color: var(--gold);
+    color: var(--plum-deep);
+  }
+  .explore-btn.active .mark{ color: var(--plum-deep); }
+
+  .explore-panel{
+    max-height: 0;
+    overflow: hidden;
+    opacity: 0;
+    transition: max-height .7s ease, opacity .5s ease, margin .5s ease;
+  }
+  .explore-panel.open{
+    max-height: 900px;
+    opacity: 1;
+    margin-top: 2.6rem;
+  }
+
+  .panel-inner{
+    background: rgba(246,236,223,0.03);
+    border: 1px solid rgba(209,164,92,0.2);
+    border-radius: 10px;
+    padding: 2.4rem 2rem;
+  }
+
+  /* letter */
+  .letter-paper{
+    max-width: 55ch;
+    margin: 0 auto;
+    font-family: 'Cormorant Garamond', serif;
+    font-style: italic;
+    font-size: 1.2rem;
+    line-height: 1.85;
+    color: var(--cream);
+    text-align: left;
+  }
+  .letter-paper .drop{
+    font-size: 2.6rem;
+    color: var(--gold);
+    line-height: 0.6;
+    padding-right: 0.15rem;
+  }
+  .letter-sign{
+    margin-top: 1.6rem;
+    font-family: 'Caveat', cursive;
+    font-size: 1.6rem;
+    color: var(--gold);
+    text-align: right;
+  }
+
+  /* pictures */
+  .gallery-grid{
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(120px, 1fr));
+    gap: 1rem;
+  }
+  .gallery-slot{
+    aspect-ratio: 1 / 1;
+    border-radius: 6px;
+    background: linear-gradient(135deg, var(--wine), var(--plum));
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: var(--cream-dim);
+    font-size: 0.65rem;
+    letter-spacing: 0.05em;
+    text-align: center;
+    padding: 0.5rem;
+    border: 1px solid rgba(209,164,92,0.15);
+  }
+
+  /* music */
+  .music-box{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 1rem;
+    text-align: center;
+  }
+  .music-box .track-name{
+    font-family: 'Caveat', cursive;
+    font-size: 1.6rem;
+    color: var(--cream);
+  }
+  .music-box audio{
+    width: 100%;
+    max-width: 380px;
+    accent-color: var(--gold);
+  }
+  .music-hint{
+    font-size: 0.75rem;
+    color: var(--cream-dim);
+    max-width: 40ch;
+  }
+
+  /* ============ NOTES LOCK ============ */
+  .lock-wrap{
+    position: relative;
+    max-width: 980px;
+    margin: 0 auto;
+    min-height: 220px;
+  }
+  .lock-overlay{
+    position: absolute;
+    inset: 0;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 1rem;
+    background: rgba(36,18,32,0.55);
+    backdrop-filter: blur(6px);
+    border-radius: 10px;
+    border: 1px solid rgba(209,164,92,0.25);
+    padding: 2rem;
+    text-align: center;
+    transition: opacity .6s ease, visibility .6s ease;
+    z-index: 3;
+  }
+  .lock-overlay .mark{
+    font-size: 1.6rem;
+    color: var(--gold);
+  }
+  .lock-overlay p{
+    font-size: 0.8rem;
+    letter-spacing: 0.08em;
+    color: var(--cream-dim);
+    max-width: 32ch;
+  }
+  .lock-form{
+    display: flex;
+    gap: 0.6rem;
+    margin-top: 0.4rem;
+  }
+  .lock-input{
+    background: rgba(246,236,223,0.06);
+    border: 1px solid rgba(209,164,92,0.35);
+    border-radius: 999px;
+    padding: 0.65rem 1.1rem;
+    color: var(--cream);
+    font-family: 'Jost', sans-serif;
+    font-size: 0.85rem;
+    letter-spacing: 0.05em;
+    outline: none;
+    width: 160px;
+  }
+  .lock-input::placeholder{ color: var(--cream-dim); opacity: 0.6; }
+  .lock-input:focus{ border-color: var(--gold); }
+  .lock-btn{
+    background: var(--gold);
+    border: none;
+    border-radius: 999px;
+    padding: 0.65rem 1.3rem;
+    color: var(--plum-deep);
+    font-family: 'Jost', sans-serif;
+    font-size: 0.78rem;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    cursor: pointer;
+  }
+  .lock-btn:hover{ background: var(--gold-bright); }
+  .lock-error{
+    font-size: 0.75rem;
+    color: var(--blush);
+    height: 1rem;
+    opacity: 0;
+    transition: opacity .3s ease;
+  }
+  .lock-error.show{ opacity: 1; }
+  .lock-wrap.unlocked .lock-overlay{
+    opacity: 0;
+    visibility: hidden;
+    pointer-events: none;
+  }
+  .lock-wrap .notes-grid{
+    filter: blur(8px);
+    transition: filter .6s ease;
+    pointer-events: none;
+  }
+  .lock-wrap.unlocked .notes-grid{
+    filter: blur(0);
+    pointer-events: auto;
+  }
+  .shake{ animation: shake .4s ease; }
+  @keyframes shake{
+    0%, 100%{ transform: translateX(0); }
+    25%{ transform: translateX(-8px); }
+    75%{ transform: translateX(8px); }
+  }
+
+  @media (prefers-reduced-motion: reduce){
+    *{ animation: none !important; transition: none !important; }
+  }
+
+  ::selection{
+    background: var(--gold);
+    color: var(--plum-deep);
+  }
+</style>
+</head>
+<body>
+
+<div id="stars"></div>
+
+<!-- ============ HERO ============ -->
+<section id="hero">
+  <div class="envelope-wrap" id="envelopeWrap">
+    <div class="envelope">
+      <div class="body"></div>
+      <div class="flap"></div>
+      <div class="seal">&amp;</div>
+    </div>
+    <div class="prompt-text">click to open our letter</div>
+
+    <div id="hero-reveal">
+      <div class="eyebrow">Happy Anniversary</div>
+      <h1 class="names">Name One <span class="amp">&amp;</span> Name Two</h1>
+      <p class="hero-sub">Edit this line with your own little tagline — a shared joke, a favorite place, anything that's just yours.</p>
+
+      <div class="counter">
+        <div><span class="num" id="cYears">0</span><span class="lbl">Years</span></div>
+        <div><span class="num" id="cDays">0</span><span class="lbl">Days</span></div>
+        <div><span class="num" id="cHours">0</span><span class="lbl">Hours</span></div>
+      </div>
+    </div>
+  </div>
+
+  <div class="scroll-cue">scroll for our story ↓</div>
+</section>
+
+<!-- ============ STORY TIMELINE ============ -->
+<section id="story">
+  <div class="section-head">
+    <div class="eyebrow">Our Story</div>
+    <h2>How we got here</h2>
+  </div>
+
+  <div class="timeline" id="timeline">
+
+    <div class="t-item">
+      <span class="t-dot"></span>
+      <span class="t-date">Month, Year</span>
+      <h3>The day we met</h3>
+      <p>Replace this with how you two actually met — the place, the small detail you still remember, the thing that made you notice them.</p>
+      <div class="polaroid" style="--tilt: -5deg;">
+        <div class="frame">add photo here</div>
+        <div class="cap">where it started</div>
+      </div>
+    </div>
+
+    <div class="t-item">
+      <span class="t-dot"></span>
+      <span class="t-date">Month, Year</span>
+      <h3>The first "I love you"</h3>
+      <p>Swap this for the moment it became real — where you were, what you were doing, who said it first.</p>
+      <div class="polaroid" style="--tilt: 4deg;">
+        <div class="frame">add photo here</div>
+        <div class="cap">us, back then</div>
+      </div>
+    </div>
+
+    <div class="t-item">
+      <span class="t-dot"></span>
+      <span class="t-date">Month, Year</span>
+      <h3>A trip / a milestone</h3>
+      <p>A favorite memory — a trip, moving in together, meeting the family. Pick the one that still makes you smile.</p>
+      <div class="polaroid" style="--tilt: -3deg;">
+        <div class="frame">add photo here</div>
+        <div class="cap">that one weekend</div>
+      </div>
+    </div>
+
+    <div class="t-item">
+      <span class="t-dot"></span>
+      <span class="t-date">Today</span>
+      <h3>Here we are</h3>
+      <p>And now — still choosing each other, one anniversary at a time.</p>
+      <div class="polaroid" style="--tilt: 5deg;">
+        <div class="frame">add photo here</div>
+        <div class="cap">right now</div>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+<!-- ============ EXPLORE: LETTER / PICTURES / MUSIC ============ -->
+<section id="explore">
+  <div class="section-head">
+    <div class="eyebrow">Take A Look</div>
+    <h2>A little more of us</h2>
+  </div>
+
+  <div class="explore-buttons">
+    <button class="explore-btn" data-panel="letterPanel"><span class="mark">✎</span> Our Letter</button>
+    <button class="explore-btn" data-panel="picturesPanel"><span class="mark">▢</span> Our Pictures</button>
+    <button class="explore-btn" data-panel="musicPanel"><span class="mark">♪</span> Our Song</button>
+  </div>
+
+  <div class="explore-panel" id="letterPanel">
+    <div class="panel-inner">
+      <div class="letter-paper">
+        <p><span class="drop">M</span>y love, edit this whole letter to say whatever you'd actually want them to read here. Write about how you feel today, an inside joke only the two of you understand, or a promise for the year ahead. Make it as long or as short as you like.</p>
+        <div class="letter-sign">— Your Name</div>
+      </div>
+    </div>
+  </div>
+
+  <div class="explore-panel" id="picturesPanel">
+    <div class="panel-inner">
+      <div class="gallery-grid">
+        <div class="gallery-slot">add photo</div>
+        <div class="gallery-slot">add photo</div>
+        <div class="gallery-slot">add photo</div>
+        <div class="gallery-slot">add photo</div>
+        <div class="gallery-slot">add photo</div>
+        <div class="gallery-slot">add photo</div>
+      </div>
+    </div>
+  </div>
+
+  <div class="explore-panel" id="musicPanel">
+    <div class="panel-inner">
+      <div class="music-box">
+        <div class="track-name">"Our Song" — Artist Name</div>
+        <audio controls>
+          <source src="your-song-file.mp3" type="audio/mpeg">
+          Your browser doesn't support audio playback.
+        </audio>
+        <p class="music-hint">Replace "your-song-file.mp3" with a link to your song, or upload an mp3 alongside this file and point to its filename here.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ LOVE NOTES (PASSWORD PROTECTED) ============ -->
+<section id="notes">
+  <div class="section-head">
+    <div class="eyebrow">Open If You'd Like</div>
+    <h2>A few little notes</h2>
+  </div>
+
+  <div class="lock-wrap" id="lockWrap">
+    <div class="lock-overlay" id="lockOverlay">
+      <div class="mark">✦</div>
+      <p>This part is just for us. Enter the password to unlock it.</p>
+      <div class="lock-form">
+        <input type="password" class="lock-input" id="lockInput" placeholder="Password" autocomplete="off">
+        <button class="lock-btn" id="lockBtn">Unlock</button>
+      </div>
+      <div class="lock-error" id="lockError">That's not it — try again.</div>
+    </div>
+
+    <div class="notes-grid" id="notesGrid">
+
+      <div class="note-card" data-msg="Edit me — say what you love most about them.">
+        <div class="icon">✦</div>
+        <div class="front-label">What I love about you</div>
+        <div class="msg"></div>
+      </div>
+
+      <div class="note-card" data-msg="Edit me — your favorite memory together.">
+        <div class="icon">✦</div>
+        <div class="front-label">My favorite memory</div>
+        <div class="msg"></div>
+      </div>
+
+      <div class="note-card" data-msg="Edit me — something you're excited for, together.">
+        <div class="icon">✦</div>
+        <div class="front-label">What's next for us</div>
+        <div class="msg"></div>
+      </div>
+
+      <div class="note-card" data-msg="Edit me — a private joke, a small thank-you, anything.">
+        <div class="icon">✦</div>
+        <div class="front-label">Just because</div>
+        <div class="msg"></div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- ============ CLOSING ============ -->
+<section id="closing">
+  <div class="eyebrow">To Many More</div>
+  <h2>Here's to every year<br>we get to do this.</h2>
+  <div class="sign">— Your Name</div>
+  <div class="date">Edit this with your anniversary date</div>
+</section>
+
+<footer>made with love, click anywhere to celebrate</footer>
+
+<script>
+  // ---------- starfield ----------
+  const starLayer = document.getElementById('stars');
+  const starCount = 70;
+  for(let i=0;i<starCount;i++){
+    const s = document.createElement('div');
+    s.className = 'star';
+    const size = Math.random()*2 + 1;
+    s.style.width = size+'px';
+    s.style.height = size+'px';
+    s.style.top = Math.random()*100+'%';
+    s.style.left = Math.random()*100+'%';
+    s.style.animationDelay = (Math.random()*4)+'s';
+    starLayer.appendChild(s);
+  }
+
+  // ---------- envelope open ----------
+  const envelopeWrap = document.getElementById('envelopeWrap');
+  const heroReveal = document.getElementById('hero-reveal');
+  let opened = false;
+  envelopeWrap.addEventListener('click', () => {
+    if(opened) return;
+    opened = true;
+    envelopeWrap.classList.add('open');
+    setTimeout(() => heroReveal.classList.add('show'), 500);
+  });
+
+  // ---------- EDIT THIS: set your anniversary start date ----------
+  const startDate = new Date('2020-01-01T00:00:00');
+
+  function updateCounter(){
+    const now = new Date();
+    let diffMs = now - startDate;
+    if(diffMs < 0) diffMs = 0;
+    const totalHours = Math.floor(diffMs / 36e5);
+    const years = now.getFullYear() - startDate.getFullYear() - ((now.getMonth() < startDate.getMonth() || (now.getMonth()===startDate.getMonth() && now.getDate()<startDate.getDate())) ? 1 : 0);
+    const anniv = new Date(startDate);
+    anniv.setFullYear(startDate.getFullYear() + years);
+    const days = Math.floor((now - anniv) / 864e5);
+    document.getElementById('cYears').textContent = years;
+    document.getElementById('cDays').textContent = days;
+    document.getElementById('cHours').textContent = totalHours % 24;
+  }
+  updateCounter();
+  setInterval(updateCounter, 60000);
+
+  // ---------- timeline scroll reveal ----------
+  const tItems = document.querySelectorAll('.t-item');
+  const io = new IntersectionObserver((entries) => {
+    entries.forEach(e => {
+      if(e.isIntersecting) e.target.classList.add('visible');
+    });
+  }, { threshold: 0.2 });
+  tItems.forEach(item => io.observe(item));
+
+  // ---------- explore: letter / pictures / music ----------
+  const exploreBtns = document.querySelectorAll('.explore-btn');
+  exploreBtns.forEach(btn => {
+    btn.addEventListener('click', () => {
+      const panel = document.getElementById(btn.dataset.panel);
+      const isOpen = panel.classList.contains('open');
+
+      // close all
+      exploreBtns.forEach(b => b.classList.remove('active'));
+      document.querySelectorAll('.explore-panel').forEach(p => p.classList.remove('open'));
+
+      // reopen the clicked one unless it was already open (toggle behavior)
+      if(!isOpen){
+        panel.classList.add('open');
+        btn.classList.add('active');
+      }
+    });
+  });
+
+  // ---------- notes password lock ----------
+  // EDIT THIS: set your own password for the notes section
+  const NOTES_PASSWORD = 'ourlove';
+
+  const lockWrap = document.getElementById('lockWrap');
+  const lockInput = document.getElementById('lockInput');
+  const lockBtn = document.getElementById('lockBtn');
+  const lockOverlay = document.getElementById('lockOverlay');
+  const lockError = document.getElementById('lockError');
+
+  function tryUnlock(){
+    if(lockInput.value.trim().toLowerCase() === NOTES_PASSWORD.toLowerCase()){
+      lockWrap.classList.add('unlocked');
+      lockError.classList.remove('show');
+    } else {
+      lockError.classList.add('show');
+      lockOverlay.classList.add('shake');
+      setTimeout(() => lockOverlay.classList.remove('shake'), 400);
+    }
+  }
+  lockBtn.addEventListener('click', tryUnlock);
+  lockInput.addEventListener('keydown', (e) => {
+    if(e.key === 'Enter') tryUnlock();
+  });
+
+  // ---------- love notes ----------
+  document.querySelectorAll('.note-card').forEach(card => {
+    card.addEventListener('click', () => {
+      if(card.classList.contains('opened')) return;
+      card.classList.add('opened');
+      card.querySelector('.msg').textContent = card.dataset.msg;
+    });
+  });
+
+  // ---------- click-anywhere heart burst ----------
+  document.addEventListener('click', (e) => {
+    const heart = document.createElement('div');
+    heart.className = 'heart-burst';
+    heart.textContent = '♥';
+    heart.style.left = (e.clientX - 8) + 'px';
+    heart.style.top = (e.clientY - 8) + 'px';
+    document.body.appendChild(heart);
+    setTimeout(() => heart.remove(), 2200);
+  });
+</script>
+
+</body>
+</html>
